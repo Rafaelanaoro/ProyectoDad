@@ -1,0 +1,86 @@
+package es.us.lsi.dad;
+
+import java.util.Objects;
+
+public class sensorImpleNFC{
+	protected Integer idS;
+	protected Integer value;
+	protected Long date;
+	protected Integer groupId;
+	protected Boolean status;
+	
+	
+	public sensorImpleNFC(Integer idS, Integer value, Long date, Integer groupId, Boolean status) {
+		super();
+		this.idS = idS;
+		this.value = value;
+		this.date = date;
+		this.groupId = groupId;
+		this.status = status;
+	}
+	
+	public sensorImpleNFC() {
+		super();
+	}
+
+	public Integer getIdS() {
+		return idS;
+	}
+
+	public void setIdS(Integer idS) {
+		this.idS = idS;
+	}
+
+	public Integer getValue() {
+		return value;
+	}
+
+	public void setValue(Integer value) {
+		this.value = value;
+	}
+
+	public Long getDate() {
+		return date;
+	}
+
+	public void setDate(Long date) {
+		this.date = date;
+	}
+
+	public Integer getGroupId() {
+		return groupId;
+	}
+
+	public void setGroupId(Integer groupId) {
+		this.groupId = groupId;
+	}
+
+	public Boolean getStatus() {
+		return status;
+	}
+
+	public void setStatus(Boolean status) {
+		this.status = status;
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(date, groupId, idS, status, value);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		sensorImpleNFC other = (sensorImpleNFC) obj;
+		return Objects.equals(date, other.date) && Objects.equals(groupId, other.groupId)
+				&& Objects.equals(idS, other.idS) && Objects.equals(status, other.status)
+				&& Objects.equals(value, other.value);
+	}
+	
+	
+}
