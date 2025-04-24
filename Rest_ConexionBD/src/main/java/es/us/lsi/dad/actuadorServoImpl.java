@@ -3,16 +3,15 @@ package es.us.lsi.dad;
 import java.util.Objects;
 
 public class actuadorServoImpl {
-	Integer idA;
+	Integer idServo;
 	Integer value;
 	Long date;
-	
 	Integer groupId;
 	Boolean Status;
 	
-	public actuadorServoImpl(Integer idA, Integer value, Long date, Integer groupId, Boolean status) {
+	public actuadorServoImpl(Integer idServo, Integer value, Long date, Integer groupId, Boolean status) {
 		super();
-		this.idA = idA;
+		this.idServo = idServo;
 		this.value = value;
 		this.date = date;
 		this.groupId = groupId;
@@ -23,12 +22,12 @@ public class actuadorServoImpl {
 		super();
 	}
 
-	public Integer getIdA() {
-		return idA;
+	public Integer getIdServo() {
+		return idServo;
 	}
 
-	public void setIdA(Integer idA) {
-		this.idA = idA;
+	public void setIdServo(Integer idServo) {
+		this.idServo = idServo;
 	}
 
 	public Integer getValue() {
@@ -65,7 +64,7 @@ public class actuadorServoImpl {
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(Status, date, groupId, idA, value);
+		return Objects.hash(Status, date, groupId, idServo, value);
 	}
 
 	@Override
@@ -78,9 +77,11 @@ public class actuadorServoImpl {
 			return false;
 		actuadorServoImpl other = (actuadorServoImpl) obj;
 		return Objects.equals(Status, other.Status) && Objects.equals(date, other.date)
-				&& Objects.equals(groupId, other.groupId) && Objects.equals(idA, other.idA)
+				&& Objects.equals(groupId, other.groupId) && Objects.equals(idServo, other.idServo)
 				&& Objects.equals(value, other.value);
 	}
+
+	
 	
 	
 	

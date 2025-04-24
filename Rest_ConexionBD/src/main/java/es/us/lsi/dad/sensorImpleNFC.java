@@ -3,16 +3,16 @@ package es.us.lsi.dad;
 import java.util.Objects;
 
 public class sensorImpleNFC{
-	protected Integer idS;
+	protected Integer idNFC;
 	protected Integer value;
 	protected Long date;
 	protected Integer groupId;
 	protected Boolean status;
 	
 	
-	public sensorImpleNFC(Integer idS, Integer value, Long date, Integer groupId, Boolean status) {
+	public sensorImpleNFC(Integer idNFC, Integer value, Long date, Integer groupId, Boolean status) {
 		super();
-		this.idS = idS;
+		this.idNFC = idNFC;
 		this.value = value;
 		this.date = date;
 		this.groupId = groupId;
@@ -23,12 +23,12 @@ public class sensorImpleNFC{
 		super();
 	}
 
-	public Integer getIdS() {
-		return idS;
+	public Integer getIdNFC() {
+		return idNFC;
 	}
 
-	public void setIdS(Integer idS) {
-		this.idS = idS;
+	public void setIdNFC(Integer idNFC) {
+		this.idNFC = idNFC;
 	}
 
 	public Integer getValue() {
@@ -65,7 +65,7 @@ public class sensorImpleNFC{
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(date, groupId, idS, status, value);
+		return Objects.hash(date, groupId, idNFC, status, value);
 	}
 
 	@Override
@@ -78,9 +78,8 @@ public class sensorImpleNFC{
 			return false;
 		sensorImpleNFC other = (sensorImpleNFC) obj;
 		return Objects.equals(date, other.date) && Objects.equals(groupId, other.groupId)
-				&& Objects.equals(idS, other.idS) && Objects.equals(status, other.status)
+				&& Objects.equals(idNFC, other.idNFC) && Objects.equals(status, other.status)
 				&& Objects.equals(value, other.value);
 	}
-	
-	
+
 }

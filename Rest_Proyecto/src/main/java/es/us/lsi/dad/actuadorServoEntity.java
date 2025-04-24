@@ -2,33 +2,32 @@ package es.us.lsi.dad;
 
 import java.util.Objects;
 
-public class sensorImpleNFC{
-	protected Integer idNFC;
-	protected Integer value;
-	protected Long date;
-	protected Integer groupId;
-	protected Boolean status;
+public class actuadorServoEntity {
+	Integer idServo;
+	Integer value;
+	Long date;
+	Integer groupId;
+	Boolean Status;
 	
-	
-	public sensorImpleNFC(Integer idNFC, Integer value, Long date, Integer groupId, Boolean status) {
+	public actuadorServoEntity(Integer idServo, Integer value, Long date, Integer groupId, Boolean status) {
 		super();
-		this.idNFC = idNFC;
+		this.idServo = idServo;
 		this.value = value;
 		this.date = date;
 		this.groupId = groupId;
-		this.status = status;
+		Status = status;
 	}
 	
-	public sensorImpleNFC() {
+	public actuadorServoEntity() {
 		super();
 	}
 
-	public Integer getIdNFC() {
-		return idNFC;
+	public Integer getIdServo() {
+		return idServo;
 	}
 
-	public void setIdNFC(Integer idNFC) {
-		this.idNFC = idNFC;
+	public void setIdServo(Integer idServo) {
+		this.idServo = idServo;
 	}
 
 	public Integer getValue() {
@@ -56,16 +55,16 @@ public class sensorImpleNFC{
 	}
 
 	public Boolean getStatus() {
-		return status;
+		return Status;
 	}
 
 	public void setStatus(Boolean status) {
-		this.status = status;
+		Status = status;
 	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(date, groupId, idNFC, status, value);
+		return Objects.hash(Status, date, groupId, idServo, value);
 	}
 
 	@Override
@@ -76,10 +75,11 @@ public class sensorImpleNFC{
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		sensorImpleNFC other = (sensorImpleNFC) obj;
-		return Objects.equals(date, other.date) && Objects.equals(groupId, other.groupId)
-				&& Objects.equals(idNFC, other.idNFC) && Objects.equals(status, other.status)
+		actuadorServoEntity other = (actuadorServoEntity) obj;
+		return Objects.equals(Status, other.Status) && Objects.equals(date, other.date)
+				&& Objects.equals(groupId, other.groupId) && Objects.equals(idServo, other.idServo)
 				&& Objects.equals(value, other.value);
 	}
 
+	
 }

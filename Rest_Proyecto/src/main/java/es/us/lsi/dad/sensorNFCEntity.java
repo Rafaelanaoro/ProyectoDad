@@ -2,7 +2,7 @@ package es.us.lsi.dad;
 
 import java.util.Objects;
 
-public class sensorImpleNFC{
+public class sensorNFCEntity{
 	protected Integer idNFC;
 	protected Integer value;
 	protected Long date;
@@ -10,7 +10,7 @@ public class sensorImpleNFC{
 	protected Boolean status;
 	
 	
-	public sensorImpleNFC(Integer idNFC, Integer value, Long date, Integer groupId, Boolean status) {
+	public sensorNFCEntity(Integer idNFC, Integer value, Long date, Integer groupId, Boolean status) {
 		super();
 		this.idNFC = idNFC;
 		this.value = value;
@@ -19,7 +19,7 @@ public class sensorImpleNFC{
 		this.status = status;
 	}
 	
-	public sensorImpleNFC() {
+	public sensorNFCEntity() {
 		super();
 	}
 
@@ -76,10 +76,11 @@ public class sensorImpleNFC{
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		sensorImpleNFC other = (sensorImpleNFC) obj;
+		sensorNFCEntity other = (sensorNFCEntity) obj;
 		return Objects.equals(date, other.date) && Objects.equals(groupId, other.groupId)
 				&& Objects.equals(idNFC, other.idNFC) && Objects.equals(status, other.status)
 				&& Objects.equals(value, other.value);
 	}
 
+	
 }

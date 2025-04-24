@@ -2,40 +2,39 @@ package es.us.lsi.dad;
 
 import java.util.Objects;
 
-public class actuadorServoImpl {
-	Integer idServo;
-	Integer value;
+public class actuadorLedEntity {
+	Integer idled;
+	Double nivel_luz;
 	Long date;
 	Integer groupId;
 	Boolean Status;
-	
-	public actuadorServoImpl(Integer idServo, Integer value, Long date, Integer groupId, Boolean status) {
+	public actuadorLedEntity(Integer idled, Double nivel_luz, Long date, Integer groupId, Boolean status) {
 		super();
-		this.idServo = idServo;
-		this.value = value;
+		this.idled = idled;
+		this.nivel_luz = nivel_luz;
 		this.date = date;
 		this.groupId = groupId;
 		Status = status;
 	}
 	
-	public actuadorServoImpl() {
+	public actuadorLedEntity() {
 		super();
 	}
 
-	public Integer getIdServo() {
-		return idServo;
+	public Integer getIdled() {
+		return idled;
 	}
 
-	public void setIdServo(Integer idServo) {
-		this.idServo = idServo;
+	public void setIdled(Integer idled) {
+		this.idled = idled;
 	}
 
-	public Integer getValue() {
-		return value;
+	public Double getNivel_luz() {
+		return nivel_luz;
 	}
 
-	public void setValue(Integer value) {
-		this.value = value;
+	public void setNivel_luz(Double nivel_luz) {
+		this.nivel_luz = nivel_luz;
 	}
 
 	public Long getDate() {
@@ -64,7 +63,7 @@ public class actuadorServoImpl {
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(Status, date, groupId, idServo, value);
+		return Objects.hash(Status, date, groupId, idled, nivel_luz);
 	}
 
 	@Override
@@ -75,15 +74,12 @@ public class actuadorServoImpl {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		actuadorServoImpl other = (actuadorServoImpl) obj;
+		actuadorLedEntity other = (actuadorLedEntity) obj;
 		return Objects.equals(Status, other.Status) && Objects.equals(date, other.date)
-				&& Objects.equals(groupId, other.groupId) && Objects.equals(idServo, other.idServo)
-				&& Objects.equals(value, other.value);
+				&& Objects.equals(groupId, other.groupId) && Objects.equals(idled, other.idled)
+				&& Objects.equals(nivel_luz, other.nivel_luz);
 	}
+	
 
-	
-	
-	
-	
-	
 }
+
