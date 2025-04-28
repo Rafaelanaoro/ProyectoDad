@@ -4,15 +4,15 @@ import java.util.Objects;
 
 public class actuadorServoImpl {
 	Integer idServo;
-	Integer value;
+	Integer valor;
 	Long date;
 	Integer groupId;
 	Boolean Status;
 	
-	public actuadorServoImpl(Integer idServo, Integer value, Long date, Integer groupId, Boolean status) {
+	public actuadorServoImpl(Integer idServo, Integer valor, Long date, Integer groupId, Boolean status) {
 		super();
 		this.idServo = idServo;
-		this.value = value;
+		this.valor = valor;
 		this.date = date;
 		this.groupId = groupId;
 		Status = status;
@@ -30,12 +30,12 @@ public class actuadorServoImpl {
 		this.idServo = idServo;
 	}
 
-	public Integer getValue() {
-		return value;
+	public Integer getvalor() {
+		return valor;
 	}
 
-	public void setValue(Integer value) {
-		this.value = value;
+	public void setvalor(Integer valor) {
+		this.valor = valor;
 	}
 
 	public Long getDate() {
@@ -64,7 +64,7 @@ public class actuadorServoImpl {
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(Status, date, groupId, idServo, value);
+		return Objects.hash(Status, date, groupId, idServo, valor);
 	}
 
 	@Override
@@ -78,7 +78,7 @@ public class actuadorServoImpl {
 		actuadorServoImpl other = (actuadorServoImpl) obj;
 		return Objects.equals(Status, other.Status) && Objects.equals(date, other.date)
 				&& Objects.equals(groupId, other.groupId) && Objects.equals(idServo, other.idServo)
-				&& Objects.equals(value, other.value);
+				&& Objects.equals(valor, other.valor);
 	}
 
 	

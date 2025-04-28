@@ -4,16 +4,16 @@ import java.util.Objects;
 
 public class sensorNFCEntity{
 	protected Integer idNFC;
-	protected Integer value;
+	protected Integer valor;
 	protected Long date;
 	protected Integer groupId;
 	protected Boolean status;
 	
 	
-	public sensorNFCEntity(Integer idNFC, Integer value, Long date, Integer groupId, Boolean status) {
+	public sensorNFCEntity(Integer idNFC, Integer valor, Long date, Integer groupId, Boolean status) {
 		super();
 		this.idNFC = idNFC;
-		this.value = value;
+		this.valor = valor;
 		this.date = date;
 		this.groupId = groupId;
 		this.status = status;
@@ -31,12 +31,12 @@ public class sensorNFCEntity{
 		this.idNFC = idNFC;
 	}
 
-	public Integer getValue() {
-		return value;
+	public Integer getvalor() {
+		return valor;
 	}
 
-	public void setValue(Integer value) {
-		this.value = value;
+	public void setvalor(Integer valor) {
+		this.valor = valor;
 	}
 
 	public Long getDate() {
@@ -65,7 +65,7 @@ public class sensorNFCEntity{
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(date, groupId, idNFC, status, value);
+		return Objects.hash(date, groupId, idNFC, status, valor);
 	}
 
 	@Override
@@ -79,7 +79,7 @@ public class sensorNFCEntity{
 		sensorNFCEntity other = (sensorNFCEntity) obj;
 		return Objects.equals(date, other.date) && Objects.equals(groupId, other.groupId)
 				&& Objects.equals(idNFC, other.idNFC) && Objects.equals(status, other.status)
-				&& Objects.equals(value, other.value);
+				&& Objects.equals(valor, other.valor);
 	}
 
 	
