@@ -35,7 +35,7 @@ public class RestServer extends AbstractVerticle {
 
 		mqttClient.connect(1883, "localhost", s -> {
 
-			mqttClient.subscribe("twmp", MqttQoS.AT_LEAST_ONCE.value(), handler -> {
+			mqttClient.subscribe("twmp", MqttQoS.AT_LEAST_ONCE.valor(), handler -> {
 				if (handler.succeeded()) {
 					System.out.println("Suscripción " + mqttClient.clientId());
 				}
@@ -99,7 +99,7 @@ public class RestServer extends AbstractVerticle {
 				System.out.println(resultSet.size());
 				List<sensorImpleNFC> result = new ArrayList<>();
 				for (Row elem : resultSet) {
-					result.add(new sensorImpleNFC(elem.getInteger("idNFC"), elem.getInteger("value"),
+					result.add(new sensorImpleNFC(elem.getInteger("idNFC"), elem.getInteger("valor"),
 							elem.getLong("date"), elem.getInteger("groupId"), elem.getBoolean("Status")));
 				}
 				System.out.println(result.toString());
@@ -124,7 +124,7 @@ public class RestServer extends AbstractVerticle {
 								System.out.println(resultSet.size());
 								List<sensorImpleNFC> result = new ArrayList<>();
 								for (Row elem : resultSet) {
-									result.add(new sensorImpleNFC(elem.getInteger("idNFC"), elem.getInteger("value"),
+									result.add(new sensorImpleNFC(elem.getInteger("idNFC"), elem.getInteger("valor"),
 											elem.getLong("date"), elem.getInteger("groupId"),
 											elem.getBoolean("Status")));
 								}
@@ -157,7 +157,7 @@ public class RestServer extends AbstractVerticle {
 								System.out.println(resultSet.size());
 								List<sensorImpleNFC> result = new ArrayList<>();
 								for (Row elem : resultSet) {
-									result.add(new sensorImpleNFC(elem.getInteger("idNFC"), elem.getInteger("value"),
+									result.add(new sensorImpleNFC(elem.getInteger("idNFC"), elem.getInteger("valor"),
 											elem.getLong("date"), elem.getInteger("groupId"),
 											elem.getBoolean("Status")));
 								}
@@ -181,12 +181,12 @@ public class RestServer extends AbstractVerticle {
 	private void addSensorNFC(RoutingContext routingContext) {
 		final sensorImpleNFC NFC = gson.fromJson(routingContext.getBodyAsString(), sensorImpleNFC.class);
 		NFC.setDate(Calendar.getInstance().getTimeInMillis());
-		mySQLclient.preparedQuery("INSERT INTO sensorNFC (idNFC, value, date, groupId, Status) VALUES (?, ?, ?, ?, ?)")
-				.execute((Tuple.of(NFC.getIdNFC(), NFC.getValue(), NFC.getDate(), NFC.getGroupId(), NFC.getStatus())),
+		mySQLclient.preparedQuery("INSERT INTO sensorNFC (idNFC, valor, date, groupId, Status) valorS (?, ?, ?, ?, ?)")
+				.execute((Tuple.of(NFC.getIdNFC(), NFC.getvalor(), NFC.getDate(), NFC.getGroupId(), NFC.getStatus())),
 						res -> {
 							if (res.succeeded()) {
 								if (mqttClient != null) {
-									if (NFC.value == 1) {
+									if (NFC.valor == 1) {
 										mqttClient.publish("twmp", Buffer.buffer("ON"), MqttQoS.AT_LEAST_ONCE, false,
 												false);
 									} else {
@@ -305,7 +305,7 @@ public class RestServer extends AbstractVerticle {
 
 		mySQLclient
 				.preparedQuery(
-						"INSERT INTO actuadorled (idled, nivel_luz, date, groupId, Status) VALUES (?, ?, ?, ?, ?)")
+						"INSERT INTO actuadorled (idled, nivel_luz, date, groupId, Status) valorS (?, ?, ?, ?, ?)")
 				.execute((Tuple.of(led.getIdled(), led.getNivel_luz(), led.getDate(), led.getGroupId(),
 						led.getStatus())), res -> {
 							if (res.succeeded()) {
@@ -328,7 +328,7 @@ public class RestServer extends AbstractVerticle {
 				System.out.println(resultSet.size());
 				List<actuadorServoImpl> result = new ArrayList<>();
 				for (Row elem : resultSet) {
-					result.add(new actuadorServoImpl(elem.getInteger("idNFCervo"), elem.getInteger("value"),
+					result.add(new actuadorServoImpl(elem.getInteger("idNFCervo"), elem.getInteger("valor"),
 							elem.getLong("date"), elem.getInteger("groupId"), elem.getBoolean("Status")));
 				}
 				System.out.println(result.toString());
@@ -353,7 +353,7 @@ public class RestServer extends AbstractVerticle {
 								System.out.println(resultSet.size());
 								List<actuadorServoImpl> result = new ArrayList<>();
 								for (Row elem : resultSet) {
-									result.add(new actuadorServoImpl(elem.getInteger("idNFCervo"), elem.getInteger("value"),
+									result.add(new actuadorServoImpl(elem.getInteger("idNFCervo"), elem.getInteger("valor"),
 											elem.getLong("date"), elem.getInteger("groupId"),
 											elem.getBoolean("Status")));
 								}
@@ -387,7 +387,7 @@ public class RestServer extends AbstractVerticle {
 								System.out.println(resultSet.size());
 								List<actuadorServoImpl> result = new ArrayList<>();
 								for (Row elem : resultSet) {
-									result.add(new actuadorServoImpl(elem.getInteger("idNFCervo"), elem.getInteger("value"),
+									result.add(new actuadorServoImpl(elem.getInteger("idNFCervo"), elem.getInteger("valor"),
 											elem.getLong("date"), elem.getInteger("groupId"),
 											elem.getBoolean("Status")));
 								}
@@ -413,8 +413,8 @@ public class RestServer extends AbstractVerticle {
 		final actuadorServoImpl Servo = gson.fromJson(routing.getBodyAsString(), actuadorServoImpl.class);
 
 		mySQLclient
-				.preparedQuery("INSERT INTO actuadorServo (idNFCervo, value, date,  groupId, Status) VALUES (?, ?, ?, ?, ?)")
-				.execute((Tuple.of(Servo.getIdServo(), Servo.getValue(), Servo.getDate(), Servo.getGroupId(),
+				.preparedQuery("INSERT INTO actuadorServo (idNFCervo, valor, date,  groupId, Status) valorS (?, ?, ?, ?, ?)")
+				.execute((Tuple.of(Servo.getIdServo(), Servo.getvalor(), Servo.getDate(), Servo.getGroupId(),
 						Servo.getStatus())), res -> {
 							if (res.succeeded()) {
 								routing.response().setStatusCode(201)

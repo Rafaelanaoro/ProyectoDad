@@ -4,18 +4,18 @@ import java.util.Objects;
 
 public class actuadorServoImpl {
 	Integer idServo;
-	Integer value;
-	Long date;
+	Integer valor;
+	Long fecha;
 	Integer groupId;
-	Boolean Status;
+	Boolean estado;
 	
-	public actuadorServoImpl(Integer idServo, Integer value, Long date, Integer groupId, Boolean status) {
+	public actuadorServoImpl(Integer idServo, Integer valor, Long fecha, Integer groupId, Boolean estado) {
 		super();
 		this.idServo = idServo;
-		this.value = value;
-		this.date = date;
+		this.valor = valor;
+		this.fecha = fecha;
 		this.groupId = groupId;
-		Status = status;
+		estado = estado;
 	}
 	
 	public actuadorServoImpl() {
@@ -30,20 +30,20 @@ public class actuadorServoImpl {
 		this.idServo = idServo;
 	}
 
-	public Integer getValue() {
-		return value;
+	public Integer getvalor() {
+		return valor;
 	}
 
-	public void setValue(Integer value) {
-		this.value = value;
+	public void setvalor(Integer valor) {
+		this.valor = valor;
 	}
 
-	public Long getDate() {
-		return date;
+	public Long getfecha() {
+		return fecha;
 	}
 
-	public void setDate(Long date) {
-		this.date = date;
+	public void setfecha(Long fecha) {
+		this.fecha = fecha;
 	}
 
 	public Integer getGroupId() {
@@ -54,17 +54,17 @@ public class actuadorServoImpl {
 		this.groupId = groupId;
 	}
 
-	public Boolean getStatus() {
-		return Status;
+	public Boolean getestado() {
+		return estado;
 	}
 
-	public void setStatus(Boolean status) {
-		Status = status;
+	public void setestado(Boolean estado) {
+		estado = estado;
 	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(Status, date, groupId, idServo, value);
+		return Objects.hash(estado, fecha, groupId, idServo, valor);
 	}
 
 	@Override
@@ -76,9 +76,9 @@ public class actuadorServoImpl {
 		if (getClass() != obj.getClass())
 			return false;
 		actuadorServoImpl other = (actuadorServoImpl) obj;
-		return Objects.equals(Status, other.Status) && Objects.equals(date, other.date)
+		return Objects.equals(estado, other.estado) && Objects.equals(fecha, other.fecha)
 				&& Objects.equals(groupId, other.groupId) && Objects.equals(idServo, other.idServo)
-				&& Objects.equals(value, other.value);
+				&& Objects.equals(valor, other.valor);
 	}
 
 	

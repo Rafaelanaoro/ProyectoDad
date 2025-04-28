@@ -5,16 +5,16 @@ import java.util.Objects;
 public class actuadorLedImpl {
 	Integer idled;
 	Double nivel_luz;
-	Long date;
+	Long fecha;
 	Integer groupId;
-	Boolean Status;
-	public actuadorLedImpl(Integer  idled, Double nivel_luz, Long date, Integer groupId, Boolean status) {
+	Boolean estado;
+	public actuadorLedImpl(Integer  idled, Double nivel_luz, Long fecha, Integer groupId, Boolean estado) {
 		super();
 		this.idled = idled;
 		this.nivel_luz = nivel_luz;
-		this.date = date;
+		this.fecha = fecha;
 		this.groupId = groupId;
-		Status = status;
+		estado = estado;
 	}	
 
 	public actuadorLedImpl() {
@@ -37,12 +37,12 @@ public class actuadorLedImpl {
 		this.nivel_luz = nivel_luz;
 	}
 
-	public Long getDate() {
-		return date;
+	public Long getfecha() {
+		return fecha;
 	}
 
-	public void setDate(Long date) {
-		this.date = date;
+	public void setfecha(Long fecha) {
+		this.fecha = fecha;
 	}
 
 	public Integer getGroupId() {
@@ -53,17 +53,17 @@ public class actuadorLedImpl {
 		this.groupId = groupId;
 	}
 
-	public Boolean getStatus() {
-		return Status;
+	public Boolean getestado() {
+		return estado;
 	}
 
-	public void setStatus(Boolean status) {
-		Status = status;
+	public void setestado(Boolean estado) {
+		estado = estado;
 	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(Status, date, groupId, idled, nivel_luz);
+		return Objects.hash(estado, fecha, groupId, idled, nivel_luz);
 	}
 
 	@Override
@@ -75,7 +75,7 @@ public class actuadorLedImpl {
 		if (getClass() != obj.getClass())
 			return false;
 		actuadorLedImpl other = (actuadorLedImpl) obj;
-		return Objects.equals(Status, other.Status) && Objects.equals(date, other.date)
+		return Objects.equals(estado, other.estado) && Objects.equals(fecha, other.fecha)
 				&& Objects.equals(groupId, other.groupId) && Objects.equals(idled, other.idled)
 				&& Objects.equals(nivel_luz, other.nivel_luz);
 	}
