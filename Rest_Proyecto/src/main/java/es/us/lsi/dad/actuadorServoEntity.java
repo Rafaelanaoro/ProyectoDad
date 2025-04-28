@@ -4,69 +4,56 @@ import java.util.Objects;
 
 public class actuadorServoEntity {
 	Integer idServo;
-	Integer value;
-	Long date;
+	Integer valor;
+	Long fecha;
 	Integer groupId;
-	Boolean Status;
-	
-	public actuadorServoEntity(Integer idServo, Integer value, Long date, Integer groupId, Boolean status) {
+	Boolean estado;
+	public actuadorServoEntity(Integer idServo, Integer valor, Long fecha, Integer groupId, Boolean estado) {
 		super();
 		this.idServo = idServo;
-		this.value = value;
-		this.date = date;
+		this.valor = valor;
+		this.fecha = fecha;
 		this.groupId = groupId;
-		Status = status;
+		this.estado = estado;
 	}
 	
 	public actuadorServoEntity() {
-		super();
 	}
-
+	
 	public Integer getIdServo() {
 		return idServo;
 	}
-
 	public void setIdServo(Integer idServo) {
 		this.idServo = idServo;
 	}
-
-	public Integer getValue() {
-		return value;
+	public Integer getValor() {
+		return valor;
 	}
-
-	public void setValue(Integer value) {
-		this.value = value;
+	public void setValor(Integer valor) {
+		this.valor = valor;
 	}
-
-	public Long getDate() {
-		return date;
+	public Long getFecha() {
+		return fecha;
 	}
-
-	public void setDate(Long date) {
-		this.date = date;
+	public void setFecha(Long fecha) {
+		this.fecha = fecha;
 	}
-
 	public Integer getGroupId() {
 		return groupId;
 	}
-
 	public void setGroupId(Integer groupId) {
 		this.groupId = groupId;
 	}
-
-	public Boolean getStatus() {
-		return Status;
+	public Boolean getEstado() {
+		return estado;
 	}
-
-	public void setStatus(Boolean status) {
-		Status = status;
+	public void setEstado(Boolean estado) {
+		this.estado = estado;
 	}
-
 	@Override
 	public int hashCode() {
-		return Objects.hash(Status, date, groupId, idServo, value);
+		return Objects.hash(estado, fecha, groupId, idServo, valor);
 	}
-
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -76,10 +63,11 @@ public class actuadorServoEntity {
 		if (getClass() != obj.getClass())
 			return false;
 		actuadorServoEntity other = (actuadorServoEntity) obj;
-		return Objects.equals(Status, other.Status) && Objects.equals(date, other.date)
+		return Objects.equals(estado, other.estado) && Objects.equals(fecha, other.fecha)
 				&& Objects.equals(groupId, other.groupId) && Objects.equals(idServo, other.idServo)
-				&& Objects.equals(value, other.value);
+				&& Objects.equals(valor, other.valor);
 	}
+	
 
 	
 }

@@ -35,7 +35,7 @@ public class RestServer extends AbstractVerticle {
 
 		mqttClient.connect(1883, "localhost", s -> {
 
-			mqttClient.subscribe("twmp", MqttQoS.AT_LEAST_ONCE.valor(), handler -> {
+			mqttClient.subscribe("twmp", MqttQoS.AT_LEAST_ONCE.value(), handler -> {
 				if (handler.succeeded()) {
 					System.out.println("Suscripción " + mqttClient.clientId());
 				}
@@ -100,7 +100,7 @@ public class RestServer extends AbstractVerticle {
 				List<sensorImpleNFC> result = new ArrayList<>();
 				for (Row elem : resultSet) {
 					result.add(new sensorImpleNFC(elem.getInteger("idNFC"), elem.getInteger("valor"),
-							elem.getLong("date"), elem.getInteger("groupId"), elem.getBoolean("Status")));
+							elem.getLong("fecha"), elem.getInteger("groupId"), elem.getBoolean("estado")));
 				}
 				System.out.println(result.toString());
 				routingContext.response().setStatusCode(201).end("Datos del sensor recibidos correctamente");
@@ -125,8 +125,8 @@ public class RestServer extends AbstractVerticle {
 								List<sensorImpleNFC> result = new ArrayList<>();
 								for (Row elem : resultSet) {
 									result.add(new sensorImpleNFC(elem.getInteger("idNFC"), elem.getInteger("valor"),
-											elem.getLong("date"), elem.getInteger("groupId"),
-											elem.getBoolean("Status")));
+											elem.getLong("fecha"), elem.getInteger("groupId"),
+											elem.getBoolean("estado")));
 								}
 								System.out.println(result.toString());
 								routingContext.response().setStatusCode(201)
@@ -149,7 +149,7 @@ public class RestServer extends AbstractVerticle {
 		mySQLclient.getConnection(connection -> {
 			if (connection.succeeded()) {
 				connection.result()
-						.preparedQuery("SELECT * FROM proyecto_dad.sensorNFC WHERE idNFC = ? ORDER BY date DESC LIMIT 1")
+						.preparedQuery("SELECT * FROM proyecto_dad.sensorNFC WHERE idNFC = ? ORDER BY fecha DESC LIMIT 1")
 						.execute(Tuple.of(id), res -> {
 							if (res.succeeded()) {
 								// Get the result set
@@ -158,8 +158,8 @@ public class RestServer extends AbstractVerticle {
 								List<sensorImpleNFC> result = new ArrayList<>();
 								for (Row elem : resultSet) {
 									result.add(new sensorImpleNFC(elem.getInteger("idNFC"), elem.getInteger("valor"),
-											elem.getLong("date"), elem.getInteger("groupId"),
-											elem.getBoolean("Status")));
+											elem.getLong("fecha"), elem.getInteger("groupId"),
+											elem.getBoolean("estado")));
 								}
 								System.out.println(result.toString());
 								routingContext.response().setStatusCode(201)
@@ -180,9 +180,9 @@ public class RestServer extends AbstractVerticle {
 
 	private void addSensorNFC(RoutingContext routingContext) {
 		final sensorImpleNFC NFC = gson.fromJson(routingContext.getBodyAsString(), sensorImpleNFC.class);
-		NFC.setDate(Calendar.getInstance().getTimeInMillis());
-		mySQLclient.preparedQuery("INSERT INTO sensorNFC (idNFC, valor, date, groupId, Status) valorS (?, ?, ?, ?, ?)")
-				.execute((Tuple.of(NFC.getIdNFC(), NFC.getvalor(), NFC.getDate(), NFC.getGroupId(), NFC.getStatus())),
+		NFC.setfecha(Calendar.getInstance().getTimeInMillis());
+		mySQLclient.preparedQuery("INSERT INTO sensorNFC (idNFC, valor, fecha, groupId, estado) valorS (?, ?, ?, ?, ?)")
+				.execute((Tuple.of(NFC.getIdNFC(), NFC.getvalor(), NFC.getfecha(), NFC.getGroupId(), NFC.getestado())),
 						res -> {
 							if (res.succeeded()) {
 								if (mqttClient != null) {
@@ -220,7 +220,7 @@ public class RestServer extends AbstractVerticle {
 				List<actuadorLedImpl> result = new ArrayList<>();
 				for (Row elem : resultSet) {
 					result.add(new actuadorLedImpl(elem.getInteger("idled"), elem.getDouble("nivel_luz"),
-							elem.getLong("date"), elem.getInteger("groupId"), elem.getBoolean("Status")));
+							elem.getLong("fecha"), elem.getInteger("groupId"), elem.getBoolean("estado")));
 				}
 				System.out.println(result.toString());
 				routingContext.response().setStatusCode(201).end("Datos del actuador recibidos correctamente");
@@ -245,8 +245,8 @@ public class RestServer extends AbstractVerticle {
 								List<actuadorLedImpl> result = new ArrayList<>();
 								for (Row elem : resultSet) {
 									result.add(new actuadorLedImpl(elem.getInteger("idled"),
-											elem.getDouble("nivel_luz"), elem.getLong("date"),
-											elem.getInteger("groupId"), elem.getBoolean("Status")));
+											elem.getDouble("nivel_luz"), elem.getLong("fecha"),
+											elem.getInteger("groupId"), elem.getBoolean("estado")));
 								}
 								System.out.println(result.toString());
 								routingContext.response().setStatusCode(201)
@@ -270,7 +270,7 @@ public class RestServer extends AbstractVerticle {
 			if (connection.succeeded()) {
 				connection.result()
 						.preparedQuery(
-								"SELECT * FROM proyecto_dad.actuadorled WHERE idled = ? ORDER BY date DESC LIMIT 1")
+								"SELECT * FROM proyecto_dad.actuadorled WHERE idled = ? ORDER BY fecha DESC LIMIT 1")
 						.execute(Tuple.of(id), res -> {
 							if (res.succeeded()) {
 								// Get the result set
@@ -279,8 +279,8 @@ public class RestServer extends AbstractVerticle {
 								List<actuadorLedImpl> result = new ArrayList<>();
 								for (Row elem : resultSet) {
 									result.add(new actuadorLedImpl(elem.getInteger("idled"),
-											elem.getDouble("nivel_luz"), elem.getLong("date"),
-											elem.getInteger("groupId"), elem.getBoolean("Status")));
+											elem.getDouble("nivel_luz"), elem.getLong("fecha"),
+											elem.getInteger("groupId"), elem.getBoolean("estado")));
 								}
 								System.out.println(result.toString());
 								routingContext.response().setStatusCode(201)
@@ -305,9 +305,9 @@ public class RestServer extends AbstractVerticle {
 
 		mySQLclient
 				.preparedQuery(
-						"INSERT INTO actuadorled (idled, nivel_luz, date, groupId, Status) valorS (?, ?, ?, ?, ?)")
-				.execute((Tuple.of(led.getIdled(), led.getNivel_luz(), led.getDate(), led.getGroupId(),
-						led.getStatus())), res -> {
+						"INSERT INTO actuadorled (idled, nivel_luz, fecha, groupId, estado) valorS (?, ?, ?, ?, ?)")
+				.execute((Tuple.of(led.getIdled(), led.getNivel_luz(), led.getfecha(), led.getGroupId(),
+						led.getestado())), res -> {
 							if (res.succeeded()) {
 								routing.response().setStatusCode(201)
 										.putHeader("content-type", "application/json; charset=utf-8")
@@ -328,8 +328,8 @@ public class RestServer extends AbstractVerticle {
 				System.out.println(resultSet.size());
 				List<actuadorServoImpl> result = new ArrayList<>();
 				for (Row elem : resultSet) {
-					result.add(new actuadorServoImpl(elem.getInteger("idNFCervo"), elem.getInteger("valor"),
-							elem.getLong("date"), elem.getInteger("groupId"), elem.getBoolean("Status")));
+					result.add(new actuadorServoImpl(elem.getInteger("idServo"), elem.getInteger("valor"),
+							elem.getLong("fecha"), elem.getInteger("groupId"), elem.getBoolean("estado")));
 				}
 				System.out.println(result.toString());
 				routingContext.response().setStatusCode(201).end("Datos del actuador recibidos correctamente");
@@ -354,8 +354,8 @@ public class RestServer extends AbstractVerticle {
 								List<actuadorServoImpl> result = new ArrayList<>();
 								for (Row elem : resultSet) {
 									result.add(new actuadorServoImpl(elem.getInteger("idNFCervo"), elem.getInteger("valor"),
-											elem.getLong("date"), elem.getInteger("groupId"),
-											elem.getBoolean("Status")));
+											elem.getLong("fecha"), elem.getInteger("groupId"),
+											elem.getBoolean("estado")));
 								}
 								System.out.println(result.toString());
 								routingContext.response().setStatusCode(201)
@@ -379,7 +379,7 @@ public class RestServer extends AbstractVerticle {
 			if (connection.succeeded()) {
 				connection.result()
 						.preparedQuery(
-								"SELECT * FROM proyecto_dad.actuadorServo WHERE idNFCervo = ? ORDER BY date DESC LIMIT 1")
+								"SELECT * FROM proyecto_dad.actuadorServo WHERE idNFCervo = ? ORDER BY fecha DESC LIMIT 1")
 						.execute(Tuple.of(id), res -> {
 							if (res.succeeded()) {
 								// Get the result set
@@ -388,8 +388,8 @@ public class RestServer extends AbstractVerticle {
 								List<actuadorServoImpl> result = new ArrayList<>();
 								for (Row elem : resultSet) {
 									result.add(new actuadorServoImpl(elem.getInteger("idNFCervo"), elem.getInteger("valor"),
-											elem.getLong("date"), elem.getInteger("groupId"),
-											elem.getBoolean("Status")));
+											elem.getLong("fecha"), elem.getInteger("groupId"),
+											elem.getBoolean("estado")));
 								}
 								System.out.println(result.toString());
 								routingContext.response().setStatusCode(201)
@@ -413,9 +413,9 @@ public class RestServer extends AbstractVerticle {
 		final actuadorServoImpl Servo = gson.fromJson(routing.getBodyAsString(), actuadorServoImpl.class);
 
 		mySQLclient
-				.preparedQuery("INSERT INTO actuadorServo (idNFCervo, valor, date,  groupId, Status) valorS (?, ?, ?, ?, ?)")
-				.execute((Tuple.of(Servo.getIdServo(), Servo.getvalor(), Servo.getDate(), Servo.getGroupId(),
-						Servo.getStatus())), res -> {
+				.preparedQuery("INSERT INTO actuadorServo (idNFCervo, valor, fecha,  groupId, estado) valorS (?, ?, ?, ?, ?)")
+				.execute((Tuple.of(Servo.getIdServo(), Servo.getvalor(), Servo.getfecha(), Servo.getGroupId(),
+						Servo.getestado())), res -> {
 							if (res.succeeded()) {
 								routing.response().setStatusCode(201)
 										.putHeader("content-type", "application/json; charset=utf-8")

@@ -4,19 +4,19 @@ import java.util.Objects;
 
 public class sensorImpleNFC{
 	protected Integer idNFC;
-	protected Integer value;
-	protected Long date;
+	protected Integer valor;
+	protected Long fecha;
 	protected Integer groupId;
-	protected Boolean status;
+	protected Boolean estado;
 	
 	
-	public sensorImpleNFC(Integer idNFC, Integer value, Long date, Integer groupId, Boolean status) {
+	public sensorImpleNFC(Integer idNFC, Integer valor, Long fecha, Integer groupId, Boolean estado) {
 		super();
 		this.idNFC = idNFC;
-		this.value = value;
-		this.date = date;
+		this.valor = valor;
+		this.fecha = fecha;
 		this.groupId = groupId;
-		this.status = status;
+		this.estado = estado;
 	}
 	
 	public sensorImpleNFC() {
@@ -31,20 +31,20 @@ public class sensorImpleNFC{
 		this.idNFC = idNFC;
 	}
 
-	public Integer getValue() {
-		return value;
+	public Integer getvalor() {
+		return valor;
 	}
 
-	public void setValue(Integer value) {
-		this.value = value;
+	public void setvalor(Integer valor) {
+		this.valor = valor;
 	}
 
-	public Long getDate() {
-		return date;
+	public Long getfecha() {
+		return fecha;
 	}
 
-	public void setDate(Long date) {
-		this.date = date;
+	public void setfecha(Long fecha) {
+		this.fecha = fecha;
 	}
 
 	public Integer getGroupId() {
@@ -55,17 +55,17 @@ public class sensorImpleNFC{
 		this.groupId = groupId;
 	}
 
-	public Boolean getStatus() {
-		return status;
+	public Boolean getestado() {
+		return estado;
 	}
 
-	public void setStatus(Boolean status) {
-		this.status = status;
+	public void setestado(Boolean estado) {
+		this.estado = estado;
 	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(date, groupId, idNFC, status, value);
+		return Objects.hash(fecha, groupId, idNFC, estado, valor);
 	}
 
 	@Override
@@ -77,9 +77,9 @@ public class sensorImpleNFC{
 		if (getClass() != obj.getClass())
 			return false;
 		sensorImpleNFC other = (sensorImpleNFC) obj;
-		return Objects.equals(date, other.date) && Objects.equals(groupId, other.groupId)
-				&& Objects.equals(idNFC, other.idNFC) && Objects.equals(status, other.status)
-				&& Objects.equals(value, other.value);
+		return Objects.equals(fecha, other.fecha) && Objects.equals(groupId, other.groupId)
+				&& Objects.equals(idNFC, other.idNFC) && Objects.equals(estado, other.estado)
+				&& Objects.equals(valor, other.valor);
 	}
 
 }

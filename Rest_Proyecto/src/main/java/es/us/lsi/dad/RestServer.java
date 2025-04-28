@@ -31,7 +31,7 @@ public class RestServer extends AbstractVerticle {
 	
 	
 	public void start(Promise<Void> startFuture) {
-		// Instantiating a Gson serialize object using specific date format
+		// Instantiating a Gson serialize object using specific fecha format
 		gson = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
 		// Defining the router object
 		Router router = Router.router(vertx);
@@ -90,20 +90,20 @@ public class RestServer extends AbstractVerticle {
 	
 	private void getAllWithParamsNFC(RoutingContext routingContext) {
 		
-		final String NFC = routingContext.queryParams().contains("value") ? 
-				routingContext.queryParam("value").get(0) : null;
+		final String NFC = routingContext.queryParams().contains("valor") ? 
+				routingContext.queryParam("valor").get(0) : null;
 		
-		final String date = routingContext.queryParams().contains("date") 
-				? routingContext.queryParam("date").get(0) : null;
+		final String fecha = routingContext.queryParams().contains("fecha") 
+				? routingContext.queryParam("fecha").get(0) : null;
 		
 		Double NFCSdouble = Double.parseDouble(NFC);
-		Long Datelong = Long.parseLong(date) ;
+		Long fechalong = Long.parseLong(fecha) ;
 		
 		routingContext.response().putHeader("content-type", "application/json; charset=utf-8").setStatusCode(200)
 				.end(gson.toJson(new sensorNFCEntityWrapper(NFCs.values().stream().filter(elem -> {
 					boolean res = true;
-					res = res && (NFCSdouble != null ? elem.getValue().equals(NFCSdouble) : true);
-					res = res && (Datelong != null ? elem.getDate().equals(Datelong) : true);
+					res = res && (NFCSdouble != null ? elem.getValor().equals(NFCSdouble) : true);
+					res = res && (fechalong != null ? elem.getFecha().equals(fechalong) : true);
 					return res;
 				}).collect(Collectors.toList()))));
 	}
@@ -150,8 +150,8 @@ public class RestServer extends AbstractVerticle {
 		int id = Integer.parseInt(routingContext.request().getParam("idNFC"));
 		sensorNFCEntity ds = NFCs.get(id);
 		final sensorNFCEntity element = gson.fromJson(routingContext.getBodyAsString(), sensorNFCEntity.class);
-		ds.setValue(element.getValue());
-		ds.setDate(element.getDate());
+		ds.setValor(element.getValor());
+		ds.setFecha(element.getFecha());
 		NFCs.put(ds.getIdNFC(), ds);
 		routingContext.response().setStatusCode(201).putHeader("content-type", "application/json; charset=utf-8")
 				.end(gson.toJson(element));
@@ -169,18 +169,18 @@ public class RestServer extends AbstractVerticle {
 		final String luz = routingContext.queryParams().contains("nivel_luz") ? 
 				routingContext.queryParam("nivel_luz").get(0) : null;
 		
-		final String date = routingContext.queryParams().contains("date") 
-				? routingContext.queryParam("date").get(0) : null;
+		final String fecha = routingContext.queryParams().contains("fecha") 
+				? routingContext.queryParam("fecha").get(0) : null;
 		
 		Double luzdouble = Double.parseDouble(luz);
-		Long datelong = Long.parseLong(date) ;
+		Long fechalong = Long.parseLong(fecha) ;
 		
 
 		routingContext.response().putHeader("content-type", "application/json; charset=utf-8").setStatusCode(200)
 				.end(gson.toJson(new actuadorLedEntityWrapper(leds.values().stream().filter(elem -> {
 					boolean res = true;
 					res = res && (luzdouble != null ? elem.getNivel_luz().equals(luzdouble) : true);
-					res = res && (datelong != null ? elem.getDate().equals(datelong) : true);
+					res = res && (fechalong != null ? elem.getFecha().equals(fechalong) : true);
 					return res;
 				}).collect(Collectors.toList()))));
 	}
@@ -223,21 +223,21 @@ public class RestServer extends AbstractVerticle {
 		}
 		
 		private void getAllWithParamsServo(RoutingContext routingContext) {
-			final String angulo = routingContext.queryParams().contains("value") ? 
-					routingContext.queryParam("value").get(0) : null;
+			final String angulo = routingContext.queryParams().contains("valor") ? 
+					routingContext.queryParam("valor").get(0) : null;
 			
-			final String date = routingContext.queryParams().contains("date") 
-					? routingContext.queryParam("date").get(0) : null;
+			final String fecha = routingContext.queryParams().contains("fecha") 
+					? routingContext.queryParam("fecha").get(0) : null;
 			
 			Double angulodouble = Double.parseDouble(angulo);
-			Long datelong = Long.parseLong(date) ;
+			Long fechalong = Long.parseLong(fecha) ;
 			
 
 			routingContext.response().putHeader("content-type", "application/json; charset=utf-8").setStatusCode(200)
 					.end(gson.toJson(new actuadorServoEntityWrapper(servos.values().stream().filter(elem -> {
 						boolean res = true;
-						res = res && (angulodouble != null ? elem.getValue().equals(angulodouble) : true);
-						res = res && (datelong != null ? elem.getDate().equals(datelong) : true);
+						res = res && (angulodouble != null ? elem.getValor().equals(angulodouble) : true);
+						res = res && (fechalong != null ? elem.getFecha().equals(fechalong) : true);
 						return res;
 					}).collect(Collectors.toList()))));
 		}
