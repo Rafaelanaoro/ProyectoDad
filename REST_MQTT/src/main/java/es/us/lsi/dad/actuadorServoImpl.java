@@ -15,7 +15,7 @@ public class actuadorServoImpl {
 		this.valor = valor;
 		this.fecha = fecha;
 		this.groupId = groupId;
-		estado = estado;
+		this.estado = estado;
 	}
 	
 	public actuadorServoImpl() {

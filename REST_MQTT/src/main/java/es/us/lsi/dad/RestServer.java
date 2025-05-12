@@ -177,8 +177,7 @@ public class RestServer extends AbstractVerticle {
 			}
 		});
 	}
-
-	private void addSensorNFC(RoutingContext routingContext) {
+/*
 		final sensorImpleNFC NFC = gson.fromJson(routingContext.getBodyAsString(), sensorImpleNFC.class);
 		NFC.setfecha(Calendar.getInstance().getTimeInMillis());
 		mySQLclient.preparedQuery("INSERT INTO sensorNFC (idNFC, valor, fecha, groupId, estado) valorS (?, ?, ?, ?, ?)")
@@ -206,7 +205,59 @@ public class RestServer extends AbstractVerticle {
 										.end("Error al añadir el sensor " + res.cause().getMessage());
 							}
 						});
+	}*/
+	
+	private void addSensorNFC(RoutingContext routingContext) {
+	    final sensorImpleNFC NFC = gson.fromJson(routingContext.getBodyAsString(), sensorImpleNFC.class);
+	    NFC.setfecha(Calendar.getInstance().getTimeInMillis());
+
+	    int valorNFC = NFC.getvalor(); // Este es el valor leído del sensor NFC
+
+	    mySQLclient.getConnection(connection -> {
+	        if (connection.succeeded()) {
+	            connection.result().preparedQuery("SELECT * FROM usuarios WHERE codigoNFC = ?")
+	                    .execute(Tuple.of(valorNFC), res -> {
+	                        if (res.succeeded()) {
+	                            if (res.result().size() > 0) {
+	                                // El usuario está autorizado
+
+	                                // Insertar en la tabla sensorNFC
+	                                mySQLclient.preparedQuery("INSERT INTO sensorNFC (idNFC, valor, fecha, groupId, estado) VALUES (?, ?, ?, ?, ?)")
+	                                        .execute(Tuple.of(NFC.getIdNFC(), NFC.getvalor(), NFC.getfecha(), NFC.getGroupId(), NFC.getestado()), insertRes -> {
+	                                            if (insertRes.succeeded()) {
+	                                                // Publicar ON en el topic de control de acceso
+	                                                if (mqttClient != null) {
+	                                                    mqttClient.publish("twmp", Buffer.buffer("ON"), MqttQoS.AT_LEAST_ONCE, false, false);
+	                                                    // Publicar mensaje al servo
+	                                                    mqttClient.publish("twmp", Buffer.buffer("ACTIVAR"), MqttQoS.AT_LEAST_ONCE, false, false);
+	                                                }
+
+	                                                routingContext.response().setStatusCode(201)
+	                                                        .putHeader("content-type", "application/json; charset=utf-8")
+	                                                        .end("Acceso permitido: Sensor añadido correctamente y servo activado.");
+	                                            } else {
+	                                                routingContext.response().setStatusCode(500)
+	                                                        .end("Error al añadir el sensor: " + insertRes.cause().getMessage());
+	                                            }
+	                                        });
+	                            } else {
+	                                // El usuario no está autorizado
+	                                routingContext.response().setStatusCode(403)
+	                                        .end("Acceso denegado: Usuario no autorizado.");
+	                            }
+	                        } else {
+	                            routingContext.response().setStatusCode(500)
+	                                    .end("Error al buscar usuario: " + res.cause().getMessage());
+	                        }
+	                        connection.result().close();
+	                    });
+	        } else {
+	            routingContext.response().setStatusCode(500)
+	                    .end("Error de conexión a la base de datos: " + connection.cause().getMessage());
+	        }
+	    });
 	}
+
 
 	// **************************** Actuadores ********************************
 	// =============================LED =======================================

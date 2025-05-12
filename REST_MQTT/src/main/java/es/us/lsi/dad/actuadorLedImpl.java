@@ -14,7 +14,7 @@ public class actuadorLedImpl {
 		this.nivel_luz = nivel_luz;
 		this.fecha = fecha;
 		this.groupId = groupId;
-		estado = estado;
+		this.estado = estado;
 	}	
 
 	public actuadorLedImpl() {
