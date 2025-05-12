@@ -1,0 +1,45 @@
+CREATE TABLE Usuarios  
+(  
+    id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,  
+    nombre VARCHAR(50),
+    apellido VARCHAR(50),
+    valor DOUBLE,
+    groupid INT,
+	 fecha DATE  
+)
+
+
+CREATE TABLE LED  
+(  
+    idled INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    nivel_luz DOUBLE,
+    groupid INT,
+	 fecha DATE,
+	 estado BOOLEAN  
+)
+
+
+CREATE TABLE Sensor  
+(  
+    idNFC INT NOT NULL AUTO_INCREMENT PRIMARY KEY,  
+    valor DOUBLE,
+    groupid INT,
+	 fecha DATE,
+	 estado BOOLEAN  
+)
+
+
+CREATE TABLE Servo
+(  
+    idServo INT NOT NULL AUTO_INCREMENT PRIMARY KEY,  
+    estado BOOLEAN,
+    valor INT,
+    groupId INT,
+	 fecha DATE  
+)
+
+INSERT INTO basedatosdad.led (nivel_luz,fecha,groupid,estado) VALUES ('40', '2024-03-31', 1, TRUE);
+
+INSERT INTO basedatosdad.usuarios (valor,fecha,groupid,nombre,apellido) VALUES ('1234567', '2024-03-31', 1, 'Alvaro', 'Alvarez');
+
+INSERT INTO basedatosdad.usuarios (valor,fecha,groupid,nombre,apellido) VALUES ('1234568', '2024-03-31', 1, 'Carlos', 'Carlez');
