@@ -33,7 +33,7 @@ public class RestServer extends AbstractVerticle {
 	public void start(Promise<Void> startFuture) {
 
 		MySQLConnectOptions connectOptions = new MySQLConnectOptions().setPort(3306).setHost("localhost")
-				.setDatabase("proyecto_dad").setUser("root").setPassword("root");
+				.setDatabase("basedatosdad").setUser("root").setPassword("alvaro");
 
 		PoolOptions poolOptions = new PoolOptions().setMaxSize(5);
 
@@ -211,7 +211,7 @@ public class RestServer extends AbstractVerticle {
 	// **************************** Actuadores ********************************
 	// =============================LED =======================================
 	private void getAllALed(RoutingContext routingContext) {
-		mySQLclient.query("SELECT * FROM proyecto_dad.actuadorled;").execute(res -> {
+		mySQLclient.query("SELECT * FROM basedatosdad.led;").execute(res -> {
 			if (res.succeeded()) {
 				// Get the result set
 				RowSet<Row> resultSet = res.result();
