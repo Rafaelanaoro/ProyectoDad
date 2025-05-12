@@ -37,13 +37,13 @@ public class RestServer extends AbstractVerticle {
 
 			mqttClient.subscribe("twmp", MqttQoS.AT_LEAST_ONCE.value(), handler -> {
 				if (handler.succeeded()) {
-					System.out.println("Suscripción " + mqttClient.clientId());
+					System.out.println("Suscripcion " + mqttClient.clientId());
 				}
 			});
 
 		});
 		MySQLConnectOptions connectOptions = new MySQLConnectOptions().setPort(3306).setHost("localhost")
-				.setDatabase("proyecto_dad").setUser("root").setPassword("root");
+				.setDatabase("basedatosdad").setUser("dad").setPassword("daddad");
 
 		PoolOptions poolOptions = new PoolOptions().setMaxSize(5);
 
@@ -212,7 +212,7 @@ public class RestServer extends AbstractVerticle {
 	// =============================LED =======================================
 
 	private void getAllALed(RoutingContext routingContext) {
-		mySQLclient.query("SELECT * FROM proyecto_dad.actuadorled;").execute(res -> {
+		mySQLclient.query("SELECT * FROM basedatosdad.led;").execute(res -> {
 			if (res.succeeded()) {
 				// Get the result set
 				RowSet<Row> resultSet = res.result();
