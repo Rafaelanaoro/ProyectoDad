@@ -33,7 +33,7 @@ public class RestServer extends AbstractVerticle {
 	public void start(Promise<Void> startFuture) {
 
 		MySQLConnectOptions connectOptions = new MySQLConnectOptions().setPort(3306).setHost("localhost")
-				.setDatabase("basedatosdad").setUser("root").setPassword("alvaro");
+				.setDatabase("proyecto_dad").setUser("root").setPassword("alvaro");
 
 		PoolOptions poolOptions = new PoolOptions().setMaxSize(5);
 
@@ -211,7 +211,7 @@ public class RestServer extends AbstractVerticle {
 	// **************************** Actuadores ********************************
 	// =============================LED =======================================
 	private void getAllALed(RoutingContext routingContext) {
-		mySQLclient.query("SELECT * FROM basedatosdad.led;").execute(res -> {
+		mySQLclient.query("SELECT * FROM proyecto_dad.actuadorled;").execute(res -> {
 			if (res.succeeded()) {
 				// Get the result set
 				RowSet<Row> resultSet = res.result();
@@ -219,10 +219,10 @@ public class RestServer extends AbstractVerticle {
 				List<actuadorLedImpl> result = new ArrayList<>();
 				for (Row elem : resultSet) {
 					result.add(new actuadorLedImpl(elem.getInteger("idled"), elem.getDouble("nivel_luz"),
-							elem.getLong("fecha"), elem.getInteger("groupId"), elem.getBoolean("estado")));
+							elem.getLong("fecha"), elem.getInteger("groupid"), elem.getBoolean("estado")));
 				}
-				System.out.println(result.toString());
-				routingContext.response().setStatusCode(201).end("Datos del actuador recibidos correctamente");
+				System.out.println("resultado ="+ result.toString());
+				routingContext.response().setStatusCode(201).end("Datos del actuador recibidos correctamente\n"+result.toString());
 
 			} else {
 				System.out.println("Error: " + res.cause().getLocalizedMessage());

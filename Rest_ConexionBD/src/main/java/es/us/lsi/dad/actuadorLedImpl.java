@@ -79,6 +79,12 @@ public class actuadorLedImpl {
 				&& Objects.equals(groupId, other.groupId) && Objects.equals(idled, other.idled)
 				&& Objects.equals(nivel_luz, other.nivel_luz);
 	}
+
+	@Override
+	public String toString() {
+		return "actuadorLedImpl [idled=" + idled + ", nivel_luz=" + nivel_luz + ", fecha=" + fecha + ", groupId="
+				+ groupId + ", estado=" + estado + "]";
+	}
 	
 	
 
