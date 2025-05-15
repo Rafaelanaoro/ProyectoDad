@@ -1,45 +1,53 @@
-CREATE TABLE Usuarios  
-(  
-    id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,  
-    nombre VARCHAR(50),
-    apellido VARCHAR(50),
+-- Tabla de sensores NFC
+CREATE OR REPLACE TABLE sensornfc (
+    idNFC INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
     valor DOUBLE,
     groupid INT,
-	 fecha DATE  
-)
+    fecha BIGINT,
+    estado BOOLEAN
+);
 
+-- Tabla de usuarios relacionados con NFC
+CREATE OR REPLACE TABLE usuarios (
+    id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    nombre VARCHAR(50),
+    apellido VARCHAR(50),
+    groupid INT,
+    fecha BIGINT,
+    idNFC INT,
+    FOREIGN KEY (idNFC) REFERENCES sensornfc(idNFC) ON DELETE CASCADE
+);
 
-CREATE TABLE LED  
-(  
+-- Tabla de actuador LED
+CREATE OR REPLACE TABLE actuadorled (
     idled INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
     nivel_luz DOUBLE,
     groupid INT,
-	 fecha DATE,
-	 estado BOOLEAN  
-)
+    fecha BIGINT,
+    estado BOOLEAN
+);
 
-
-CREATE TABLE Sensor  
-(  
-    idNFC INT NOT NULL AUTO_INCREMENT PRIMARY KEY,  
-    valor DOUBLE,
-    groupid INT,
-	 fecha DATE,
-	 estado BOOLEAN  
-)
-
-
-CREATE TABLE Servo
-(  
-    idServo INT NOT NULL AUTO_INCREMENT PRIMARY KEY,  
+-- Tabla de actuador servo
+CREATE OR REPLACE TABLE actuadorservo (
+    idServo INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
     estado BOOLEAN,
     valor INT,
-    groupId INT,
-	 fecha DATE  
-)
+    groupid INT,
+    fecha BIGINT
+);
 
-INSERT INTO basedatosdad.led (nivel_luz,fecha,groupid,estado) VALUES ('40', '2024-03-31', 1, TRUE);
+-- Inserciones de prueba en actuadorled
+INSERT INTO actuadorled (nivel_luz, fecha, groupid, estado)
+VALUES
+    (40, 455, 1, TRUE),
+    (50, 3434, 1, FALSE);
 
-INSERT INTO basedatosdad.usuarios (valor,fecha,groupid,nombre,apellido) VALUES ('1234567', '2024-03-31', 1, 'Alvaro', 'Alvarez');
+-- Insertar dos sensores NFC
+INSERT INTO sensornfc (valor, groupid, fecha, estado) VALUES
+(75.5, 1, UNIX_TIMESTAMP()*1000, TRUE),  -- Sensor NFC 1
+(82.3, 1, UNIX_TIMESTAMP()*1000, FALSE); -- Sensor NFC 2
 
-INSERT INTO basedatosdad.usuarios (valor,fecha,groupid,nombre,apellido) VALUES ('1234568', '2024-03-31', 1, 'Carlos', 'Carlez');
+-- Insertar dos usuarios asociados a estos sensores
+INSERT INTO usuarios (nombre, apellido, groupid, fecha, idNFC) VALUES
+('Juan', 'Pérez', 1, UNIX_TIMESTAMP()*1000, 1),  -- Usuario 1 asociado al NFC 1
+('María', 'Gómez', 1, UNIX_TIMESTAMP()*1000, 2); -- Usuario 2 asociado al NFC 2
