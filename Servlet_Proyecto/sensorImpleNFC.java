@@ -3,12 +3,6 @@ package es.us.lsi.dad;
 import java.util.Objects;
 
 public class sensorImpleNFC{
-	@Override
-	public String toString() {
-		return "sensorImpleNFC [idNFC=" + idNFC + ", valor=" + valor + ", fecha=" + fecha + ", groupId=" + groupId
-				+ ", estado=" + estado + "]";
-	}
-
 	protected Integer idNFC;
 	protected Integer valor;
 	protected Long fecha;

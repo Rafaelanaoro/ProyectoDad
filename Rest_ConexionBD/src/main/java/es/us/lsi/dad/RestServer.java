@@ -23,7 +23,6 @@ import io.vertx.sqlclient.PoolOptions;
 import io.vertx.sqlclient.Row;
 import io.vertx.sqlclient.RowSet;
 import io.vertx.sqlclient.Tuple;
-
 public class RestServer extends AbstractVerticle {
 
 	private Gson gson;
@@ -219,10 +218,10 @@ public class RestServer extends AbstractVerticle {
 				List<actuadorLedImpl> result = new ArrayList<>();
 				for (Row elem : resultSet) {
 					result.add(new actuadorLedImpl(elem.getInteger("idled"), elem.getDouble("nivel_luz"),
-							elem.getLong("fecha"), elem.getInteger("groupId"), elem.getBoolean("estado")));
+							elem.getLong("fecha"), elem.getInteger("groupid"), elem.getBoolean("estado")));
 				}
-				System.out.println(result.toString());
-				routingContext.response().setStatusCode(201).end("Datos del actuador recibidos correctamente");
+				System.out.println("resultado ="+ result.toString());
+				routingContext.response().setStatusCode(201).end("Datos del actuador recibidos correctamente\n"+result.toString());
 
 			} else {
 				System.out.println("Error: " + res.cause().getLocalizedMessage());
