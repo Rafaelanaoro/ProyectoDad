@@ -42,7 +42,7 @@ public class RestServer extends AbstractVerticle {
 			});
 
 		});
-		MySQLConnectOptions connectOptions = new MySQLConnectOptions().setPort(3306).setHost("localhost")
+		MySQLConnectOptions connectOptions = new MySQLConnectOptions().setPort(1883).setHost("localhost")
 				.setDatabase("proyecto_dad").setUser("root").setPassword("root");
 
 		PoolOptions poolOptions = new PoolOptions().setMaxSize(5);
