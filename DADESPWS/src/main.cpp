@@ -2,22 +2,18 @@
 #include "ArduinoJson.h"
 #include <WiFiUdp.h>
 #include <PubSubClient.h>
-#include <DHT.h>
-#include <DHT_U.h>
 #include <Wire.h>
-#include <Adafruit_Sensor.h>
-#include <Adafruit_BusIO_Register.h>
 
 
 
-#define DHTTYPE DHT11
-#define DHTPIN 33
+
+#define SDA_PIN 21
+#define SCL_PIN 22
+Adafruit_PN532 nfc(SDA_PIN, SCL_PIN);
 #define pin_ven 14
 #define led_luz 26
 
 #define BH170_ADDRESS 0x5C
-
-DHT dht(DHTPIN, DHTTYPE);
 
 // Replace 0 by ID of this current device
 const int DEVICE_ID = 124;
@@ -107,12 +103,22 @@ void setup()
   InitMqtt();
 
 
-  dht.begin();
+  Wire.begin(SDA_PIN, SCL_PIN);
+  nfc.begin();
+
+  
+  uint32_t versiondata = nfc.getFirmwareVersion();
+  if (!versiondata) {
+    Serial.print("No se encontró el lector NFC");
+    while (1); // Detener
+  }
+
+  nfc.SAMConfig(); // Iniciar modo lectura
+  Serial.println("Esperando tarjeta NFC...");
   
   pinMode(pin_ven, OUTPUT);
   
   digitalWrite(pin_ven, LOW);
-  Serial.println("Dht begin OK");
   
   
   pinMode(led_luz, OUTPUT);
@@ -201,7 +207,7 @@ String serializeActuatorLedStatusBody(int idled, double nivel_luz, long fecha, i
   doc["idled"] = idled;
   doc["nivel_luz"] = nivel_luz;
   doc["fecha"] = fecha;
-  doc["idP"] = idgroupIdP;
+  doc["idP"] = groupId;
   doc["idG"] = estado;
 
   String output;
@@ -490,8 +496,6 @@ void loop()
     digitalWrite(pin_ven, LOW);
   }*/
   delay(2000);
-  
-  double NFC = dht.readNFC();
   String sensorValue;
   sensorValue = serializeSensorNFCValueBody(1, NFC, 5000, 1, 1);
   

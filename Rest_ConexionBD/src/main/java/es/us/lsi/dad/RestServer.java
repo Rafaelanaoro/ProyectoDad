@@ -23,6 +23,7 @@ import io.vertx.sqlclient.PoolOptions;
 import io.vertx.sqlclient.Row;
 import io.vertx.sqlclient.RowSet;
 import io.vertx.sqlclient.Tuple;
+
 public class RestServer extends AbstractVerticle {
 
 	private Gson gson;
@@ -32,7 +33,7 @@ public class RestServer extends AbstractVerticle {
 	public void start(Promise<Void> startFuture) {
 
 		MySQLConnectOptions connectOptions = new MySQLConnectOptions().setPort(3306).setHost("localhost")
-				.setDatabase("proyecto_dad").setUser("root").setPassword("root");
+				.setDatabase("proyecto_dad").setUser("root").setPassword("alvaro");
 
 		PoolOptions poolOptions = new PoolOptions().setMaxSize(5);
 

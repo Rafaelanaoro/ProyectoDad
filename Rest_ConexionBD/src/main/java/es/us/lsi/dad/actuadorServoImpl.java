@@ -81,12 +81,6 @@ public class actuadorServoImpl {
 				&& Objects.equals(valor, other.valor);
 	}
 
-	@Override
-	public String toString() {
-		return "actuadorServoImpl [idServo=" + idServo + ", valor=" + valor + ", fecha=" + fecha + ", groupId="
-				+ groupId + ", estado=" + estado + "]";
-	}
-
 	
 	
 	

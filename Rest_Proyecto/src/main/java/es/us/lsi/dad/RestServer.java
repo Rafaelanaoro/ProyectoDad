@@ -49,9 +49,9 @@ public class RestServer extends AbstractVerticle {
 		router.route("/api/NFC*").handler(BodyHandler.create());
 		router.get("/api/NFC").handler(this::getAllWithParamsNFC);
 		router.get("/api/NFC/temperatura/allt").handler(this::getAllNFC);
-		router.get("/api/NFC/:idnfc").handler(this::getOneNFC);
+		router.get("/api/NFC/:idNFC").handler(this::getOneNFC);
 		router.post("/api/NFC").handler(this::addOneNFC);
-		router.delete("/api/NFC/:idnfc").handler(this::deleteOneNFC);
+		router.delete("/api/NFC/:idNFC").handler(this::deleteOneNFC);
 		router.put("/api/NFC/:idS").handler(this::putOneNFC);
 		//Actuador led
 		router.route("/api/led*").handler(BodyHandler.create());
@@ -111,7 +111,7 @@ public class RestServer extends AbstractVerticle {
 	private void getOneNFC(RoutingContext routingContext) {
 		int id = 0;
 		try {
-			id = Integer.parseInt(routingContext.request().getParam("idnfc"));
+			id = Integer.parseInt(routingContext.request().getParam("idNFC"));
 
 			if (NFCs.containsKey(id)) {
 				sensorNFCEntity ds = NFCs.get(id);
@@ -135,7 +135,7 @@ public class RestServer extends AbstractVerticle {
 	}
 	
 	private void deleteOneNFC(RoutingContext routingContext) {
-		int id = Integer.parseInt(routingContext.request().getParam("idnfc"));
+		int id = Integer.parseInt(routingContext.request().getParam("idNFC"));
 		if (NFCs.containsKey(id)) {
 			sensorNFCEntity nfc = NFCs.get(id);
 			NFCs.remove(id);
@@ -147,7 +147,7 @@ public class RestServer extends AbstractVerticle {
 		}
 	}
 	private void putOneNFC(RoutingContext routingContext) {
-		int id = Integer.parseInt(routingContext.request().getParam("idnfc"));
+		int id = Integer.parseInt(routingContext.request().getParam("idNFC"));
 		sensorNFCEntity ds = NFCs.get(id);
 		final sensorNFCEntity element = gson.fromJson(routingContext.getBodyAsString(), sensorNFCEntity.class);
 		ds.setValor(element.getValor());
@@ -246,7 +246,7 @@ public class RestServer extends AbstractVerticle {
 		private void getOneServo(RoutingContext routingContext) {
 			int id = 0;
 			try {
-				id = Integer.parseInt(routingContext.request().getParam("idservo"));
+				id = Integer.parseInt(routingContext.request().getParam("idServo"));
 
 				if (servos.containsKey(id)) {
 					actuadorServoEntity ds = servos.get(id);
